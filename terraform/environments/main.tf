@@ -41,7 +41,7 @@ module "asg" {
   ami_id                     = var.ami_id
   instance_type              = var.instance_type
   key_pair_name              = var.key_pair_name
-  user_data_base64           = filebase64("${path.module}/user_data.sh")
+  user_data_base64 = filebase64("${path.module}/../user_data.sh")
   instance_profile_name      = module.iam.app_instance_profile_name
   app_sg_id                  = module.security.app_sg_id
   private_subnet_ids         = module.vpc.private_subnet_ids_list
