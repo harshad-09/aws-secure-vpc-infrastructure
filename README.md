@@ -67,21 +67,27 @@ Each module accepts explicit input variables and returns explicit outputs — mo
 ## Screenshots
 
 **VPC** — subnets, route tables, and NAT/IGW connections across both AZs:
+
 ![VPC](docs/images/vpc.png)
 
 **Application Load Balancer** — listener, rules, and target group configuration:
+
 ![ALB](docs/images/alb.png)
 
 **Target group** — app instances passing the `/health` check:
+
 ![Target group](docs/images/target-group.png)
 
 **Auto Scaling Group** — launch template and capacity configuration:
+
 ![ASG](docs/images/asg.png)
 
 **Bastion host** — running instance with its Elastic IP for controlled SSH access:
+
 ![Bastion host](docs/images/bastion.png)
 
 **App running** — EC2 instance deployed in a private subnet, serving traffic through the ALB:
+
 ![EC2 instance deployed in a private subnet](docs/images/EC2-server%20deployed%20in%20private%20subnet.png)
 
 ## Prerequisites
