@@ -28,8 +28,8 @@ This project provisions a complete, production-shaped AWS environment from scrat
 
 ```
 .
-├── docs/
-│   └── images/                    # Architecture diagram and screenshots
+├── docs/images
+│                      # Architecture diagram and screenshots
 ├── terraform/
 │   ├── environments/
 │   │   ├── main.tf                # Wires all modules together
@@ -104,12 +104,7 @@ terraform apply
 
 Once applied, the app is reachable at the ALB DNS name shown in the `alb_dns_name` output.
 
-## Notes / Next Steps
 
-- Move state to a remote S3 + DynamoDB backend instead of local state
-- Add an HTTPS listener with an ACM certificate
-- Add a `modules/monitoring` module for CloudWatch alarms/dashboards, instead of folding that into `user_data.sh`
 
-## Cost
 
-This deploys billable AWS resources (EC2, NAT Gateway, ALB, EIP). Run `terraform destroy` when you're done experimenting to avoid ongoing charges.
+
