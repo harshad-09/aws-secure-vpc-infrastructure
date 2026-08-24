@@ -2,8 +2,6 @@
 
 ![AWS Production VPC Architecture](docs/images/aws-architecture.png)
 
-Terraform-managed AWS network built around a secure, three-tier, multi-AZ architecture: an internet-facing Application Load Balancer routes traffic to an Auto Scaling Group of EC2 instances in private subnets, with a bastion host as the only path in for administrative access.
-
 ## Project Overview
 
 This project provisions a complete, production-shaped AWS environment from scratch — no console click-ops, no manual steps. It's built to demonstrate the core patterns behind a secure, highly-available network on AWS:
