@@ -1,8 +1,7 @@
+# AWS Secure VPC Infrastructure
 <p align="center">
   <img src="docs/images/architecture-diagram.png" alt="AWS Production VPC Architecture" width="100%">
 </p>
-
-# AWS Secure VPC Infrastructure
 
 Terraform-managed AWS network built around a secure, three-tier, multi-AZ architecture: an internet-facing Application Load Balancer routes traffic to an Auto Scaling Group of EC2 instances in private subnets, with a bastion host as the only path in for administrative access.
 
