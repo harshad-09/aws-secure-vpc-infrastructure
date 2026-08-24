@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "./modules/vpc"
+  source = "../modules/vpc"
 
   project_name       = var.project_name
   vpc_cidr           = var.vpc_cidr
@@ -9,7 +9,7 @@ module "vpc" {
 }
 
 module "security" {
-  source = "./modules/security"
+  source = "../modules/security"
 
   project_name     = var.project_name
   vpc_id           = module.vpc.vpc_id
@@ -18,13 +18,13 @@ module "security" {
 }
 
 module "iam" {
-  source = "./modules/iam"
+  source = "../modules/iam"
 
   project_name = var.project_name
 }
 
 module "alb" {
-  source = "./modules/alb"
+  source = "../modules/alb"
 
   project_name       = var.project_name
   vpc_id             = module.vpc.vpc_id
@@ -35,7 +35,7 @@ module "alb" {
 }
 
 module "asg" {
-  source = "./modules/asg"
+  source = "../modules/asg"
 
   project_name               = var.project_name
   ami_id                     = var.ami_id
@@ -53,7 +53,7 @@ module "asg" {
 }
 
 module "bastion" {
-  source = "./modules/bastion"
+  source = "../modules/bastion"
 
   project_name           = var.project_name
   enable_bastion         = var.enable_bastion
