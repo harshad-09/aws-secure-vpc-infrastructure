@@ -147,4 +147,4 @@ terraform destroy
 
 ## AWS Services Used
 
-Amazon VPC · Amazon EC2 · Application Load Balancer · Target Groups · Auto Scaling Group · NAT Gateway · Internet Gateway · Bastion Host · Security Groups · IAM · Terraform
+Amazon VPC · Amazon EC2 · Application Load Balancer · Target Groups · Auto Scaling Group · NAT Gateway · Internet Gateway · Security Groups · IAM · Terraform
