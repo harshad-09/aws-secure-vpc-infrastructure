@@ -173,13 +173,6 @@ The default SSH user depends on the AMI (`ubuntu` for Ubuntu, `ec2-user` for Ama
 - Never commit `terraform.tfvars`, `*.pem` files or Terraform state files – keep them in `.gitignore`.
 
 ---
-
-## Roadmap
-
-- [ ] Amazon CloudWatch monitoring: alarms, dashboards and logs (shown in the architecture diagram, not yet deployed)
-- [ ] HTTPS on the ALB with an ACM certificate
-- [ ] CI/CD with GitHub Actions for zero-downtime deployments using ASG instance refresh
-
 ---
 
 ## Cleanup
