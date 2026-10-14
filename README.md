@@ -149,13 +149,6 @@ Refreshing the page shows requests being served by instances in **both** Availab
 - Never commit `terraform.tfvars`, `*.pem` files or Terraform state files – they are excluded in `.gitignore`.
 
 ---
-
-## Roadmap
-
-- [ ] Amazon CloudWatch monitoring: alarms, dashboards and logs (shown in the architecture diagram, not yet deployed)
-- [ ] HTTPS on the ALB with an ACM certificate
-- [ ] CI/CD with GitHub Actions for zero-downtime deployments using ASG instance refresh
-
 ---
 
 ## Cleanup
