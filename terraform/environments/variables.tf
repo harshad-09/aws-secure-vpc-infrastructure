@@ -1,13 +1,13 @@
 variable "project_name" {
   description = "Name of the project, used as a prefix for resource names"
   type        = string
-  default     = "prod"
+  default     = "Vpc-Project"
 }
 
 variable "aws_region" {
   description = "AWS region"
   type        = string
-  default     = "us-east-1"
+  default     = "ap-south-1"
 }
 
 variable "vpc_cidr" {
@@ -20,8 +20,8 @@ variable "public_subnet" {
   description = "Public subnet CIDRs by AZ"
   type        = map(string)
   default = {
-    "us-east-1a" = "10.0.1.0/24"
-    "us-east-1b" = "10.0.2.0/24"
+    "ap-south-1a" = "10.0.1.0/24"
+    "ap-south-1b" = "10.0.2.0/24"
   }
 }
 
@@ -29,8 +29,8 @@ variable "private_subnet" {
   description = "Private subnet CIDRs by AZ"
   type        = map(string)
   default = {
-    "us-east-1a" = "10.0.11.0/24"
-    "us-east-1b" = "10.0.12.0/24"
+    "ap-south-1a" = "10.0.11.0/24"
+    "ap-south-1b" = "10.0.12.0/24"
   }
 }
 
@@ -49,13 +49,13 @@ variable "instance_type" {
 variable "ami_id" {
   description = "AMI ID (must be Ubuntu/Debian-based to match user_data.sh, which uses apt-get)"
   type        = string
-  default     = "ami-0b6d9d3d33ba97d99"
+  default     = "ami-01a00762f46d584a1"
 }
 
 variable "key_pair_name" {
   description = "Existing EC2 key pair name for SSH access"
   type        = string
-  default     = "vpc-private-key"
+  default     = "vpc-infra-key"
 }
 
 variable "ssh_allowed_cidr" {
