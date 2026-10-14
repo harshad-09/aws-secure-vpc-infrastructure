@@ -46,16 +46,22 @@ A highly available, secure and scalable AWS network deployed in **Asia Pacific (
 ```
 aws-secure-vpc-infrastructure/
 ├── docs/
-│   └── images/              # Architecture diagram & deployment screenshots
+│   └── images/                  # Architecture diagram & deployment screenshots
 ├── terraform/
-│   ├── environments/        # Environment configurations (run Terraform from here)
+│   ├── environments/            # Root configuration (run Terraform from here)
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   ├── outputs.tf
+│   │   ├── providers.tf
+│   │   └── terraform.tfvars.example
 │   ├── modules/
-│   │   ├── alb/             # Application Load Balancer, listener, target group
-│   │   ├── asg/             # Launch template and Auto Scaling Group
-│   │   ├── bastion/         # Bastion host EC2 instance
-│   │   ├── iam/             # IAM instance profile for EC2
-│   │   └── security/        # Security groups
-│   └── user_data.sh         # Bootstrap script that installs and starts the Flask app
+│   │   ├── alb/                 # Application Load Balancer, listener, target group
+│   │   ├── asg/                 # Launch template and Auto Scaling Group
+│   │   ├── bastion/             # Bastion host EC2 instance
+│   │   ├── iam/                 # IAM instance profile for EC2
+│   │   ├── security/            # Security groups
+│   │   └── vpc/                 # VPC, subnets, gateways and route tables
+│   └── user_data.sh             # Bootstrap script that installs and starts the Flask app
 ├── .gitignore
 └── README.md
 ```
@@ -76,7 +82,7 @@ aws-secure-vpc-infrastructure/
 ```bash
 # 1. Clone the repository
 git clone https://github.com/harshad-09/aws-secure-vpc-infrastructure.git
-cd aws-secure-vpc-infrastructure/terraform/environments/<environment>
+cd aws-secure-vpc-infrastructure/terraform/environments
 
 # 2. Create your variable file from the example and edit the values
 cp terraform.tfvars.example terraform.tfvars
@@ -94,7 +100,7 @@ When `apply` finishes, Terraform prints the outputs: `alb_dns_name`, `asg_name`,
 ## Deployment Screenshots
 
 ### 1. Terraform Apply
-`terraform apply` completed with **34 resources added, and printed the ALB DNS name, ASG name, bastion host address and private subnet IDs.
+`terraform apply` completed with **34 resources added, 0 changed, 0 destroyed**, and printed the ALB DNS name, ASG name, bastion host address and private subnet IDs.
 
 ![Terraform apply](docs/images/terraform-apply.png)
 
@@ -112,7 +118,6 @@ Three instances are running with all status checks passed: the `bastion-host` (p
 `Vpc-Project-alb` is **Active** and internet-facing, spanning two Availability Zones, with an HTTP:80 listener forwarding 100% of traffic to the `Vpc-Project-tg` target group.
 
 ![Application Load Balancer](docs/images/alb.png)
-
 
 ### 5. Auto Scaling Group
 `Vpc-Project-asg` is **At desired capacity** (desired 2, scaling limits 2–4) and uses a launch template with a `t3.micro` instance type.
@@ -132,6 +137,24 @@ Refreshing the page shows requests being served by instances in **both** Availab
 ![Running application – instance in AZ-A](docs/images/running-app.png)
 
 ![Running application – instance in AZ-B](docs/images/running-app-2.png)
+
+---
+
+## Security Notes
+
+- Application instances have **no public IP** and are only reachable through the ALB.
+- SSH access to the private instances goes through the bastion host.
+- Restrict the bastion host's SSH rule to **your own IP** rather than `0.0.0.0/0`.
+- The ALB listener is HTTP only (demo setup). For production, add an HTTPS listener with an ACM certificate.
+- Never commit `terraform.tfvars`, `*.pem` files or Terraform state files – they are excluded in `.gitignore`.
+
+---
+
+## Roadmap
+
+- [ ] Amazon CloudWatch monitoring: alarms, dashboards and logs (shown in the architecture diagram, not yet deployed)
+- [ ] HTTPS on the ALB with an ACM certificate
+- [ ] CI/CD with GitHub Actions for zero-downtime deployments using ASG instance refresh
 
 ---
 
