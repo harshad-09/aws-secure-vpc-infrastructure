@@ -94,7 +94,7 @@ When `apply` finishes, Terraform prints the outputs: `alb_dns_name`, `asg_name`,
 ## Deployment Screenshots
 
 ### 1. Terraform Apply
-`terraform apply` completed with **34 resources added, 0 changed, 0 destroyed**, and printed the ALB DNS name, ASG name, bastion host address and private subnet IDs.
+`terraform apply` completed with **34 resources added, and printed the ALB DNS name, ASG name, bastion host address and private subnet IDs.
 
 ![Terraform apply](docs/images/terraform-apply.png)
 
@@ -133,46 +133,6 @@ Refreshing the page shows requests being served by instances in **both** Availab
 
 ![Running application – instance in AZ-B](docs/images/running-app-2.png)
 
----
-
-## Verify It Yourself
-
-```bash
-# Hit the load balancer (run it several times and watch the private IP change)
-curl http://<alb-dns-name>
-
-# Health check endpoint used by the target group
-curl http://<alb-dns-name>/health
-```
-
-Replace `<alb-dns-name>` with the `alb_dns_name` Terraform output (for example `Vpc-Project-alb-xxxxxxxxxx.ap-south-1.elb.amazonaws.com`).
-
----
-
-## Access Private Instances via Bastion Host
-
-```bash
-# Use SSH agent forwarding so the private key never has to be copied to the bastion
-ssh-add <your-key>.pem
-ssh -A ubuntu@<bastion-public-ip>
-
-# From the bastion, connect to a private instance
-ssh ubuntu@<private-instance-ip>
-```
-
-The default SSH user depends on the AMI (`ubuntu` for Ubuntu, `ec2-user` for Amazon Linux).
-
----
-
-## Security Notes
-
-- Application instances have **no public IP** and are only reachable through the ALB.
-- Security groups are intended to allow app traffic only from the ALB, and SSH to the app instances only from the bastion host.
-- Restrict the bastion host's SSH rule to **your own IP** instead of `0.0.0.0/0`.
-- The ALB listener is HTTP only (demo setup). For production, add an HTTPS listener with an ACM certificate and redirect HTTP to HTTPS.
-- Never commit `terraform.tfvars`, `*.pem` files or Terraform state files – keep them in `.gitignore`.
-
----
 ---
 
 ## Cleanup
