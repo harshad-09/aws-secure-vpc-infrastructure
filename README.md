@@ -113,22 +113,13 @@ Three instances are running with all status checks passed: the `bastion-host` (p
 
 ![Application Load Balancer](docs/images/alb.png)
 
-### 5. Load Balancer Resource Map
-The listener, rule, target group and both targets (port 8000) are connected, and both targets are **Healthy**.
 
-![ALB resource map](docs/images/alb-resource-map.png)
-
-### 6. Target Group
-`Vpc-Project-tg` (HTTP:8000) has 2 registered targets, one in `ap-south-1a` and one in `ap-south-1b`: 2 healthy, 0 unhealthy.
-
-![Target group](docs/images/target-group.png)
-
-### 7. Auto Scaling Group
+### 5. Auto Scaling Group
 `Vpc-Project-asg` is **At desired capacity** (desired 2, scaling limits 2–4) and uses a launch template with a `t3.micro` instance type.
 
 ![Auto Scaling Group](docs/images/asg.png)
 
-### 8. Running Application – Load Balancing Across AZs
+### 6. Running Application – Load Balancing Across AZs
 The application is reachable through the ALB DNS name. Each page confirms the request was served from a **private subnet**, after passing through the Internet Gateway and the load balancer, and shows the `/health` endpoint returning `200`.
 
 Refreshing the page shows requests being served by instances in **both** Availability Zones:
